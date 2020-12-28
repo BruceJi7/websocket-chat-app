@@ -13,7 +13,7 @@ const wsServer = new webSocketServer({
 const clients = {}
 
 const getUniqueID = () => {
-    const s4 = () => Math.floor((1 + Math.random()) * 0*10000).toString(16).substring(1)
+    const s4 = ()  => Math.floor((1 + Math.random()) *10000).toString(16).substring(1)
     return s4() + s4() + '_' + s4()
 }
 
@@ -24,7 +24,7 @@ wsServer.on('request', function (request) {
 
     const connection = request.accept(null, request.origin)
     clients[userID] = connection
-    console.log('connected: ' + userID + ' in ' + Object.getOwnPropertyNames(clients))
+    console.log('connected: ' + userID)
 
     connection.on('message', function(message) {
 
@@ -34,7 +34,7 @@ wsServer.on('request', function (request) {
             //Broadcast the message to all clients
             for (key in clients) {
                 clients[key].sendUTF(message.utf8Data)
-                console.log('Sent message to: ' + clients[key])
+                console.log('Sent message to: ' + key)
             
             }
         

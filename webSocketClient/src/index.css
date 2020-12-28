@@ -1,0 +1,46 @@
+body {
+    background-color: #bae7ff;
+}
+.main {
+    height:100vh;
+    width: 100vw;
+}
+.title {
+    text-align: center;
+    width: 100%;
+    padding: 2%;
+    background-color: #91d5ff;
+    color: #efefef;
+}
+
+/* MESSAGES */
+
+    .message-block {
+        display: flex;
+        flex-direction: column;
+        padding-bottom:20px;
+    }
+    .own-message {
+        align-self: flex-end;
+    }
+    .other-message {
+        align-self: flex-start;
+    }
+    .message-card {
+        width:600px;
+        margin: 16px 4px 0 4px;
+
+    }
+
+    .avatar {
+        color:#f56a00;
+        background-color: #fde3cf;
+    }
+
+.bottom {
+    position: fixed;
+    width: 100%;
+    left:0;
+    bottom:0;
+
+}
