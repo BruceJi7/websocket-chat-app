@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom'
 import React, { useState, useEffect } from 'react'
 
-// import Identicon from 'react-identicons'
+import Identicon from 'react-identicons'
 
 import { w3cwebsocket as W3CWebSocket } from "websocket"
 
@@ -18,7 +18,7 @@ const { Meta } = Card
 
 
 
-const client = new W3CWebSocket('ws://127.0.0.1:8000')
+const client = new W3CWebSocket('ws://192.168.100.133:8000')
 
 export default function App() {
 
@@ -36,7 +36,8 @@ export default function App() {
         }
         console.log(UTCtime())
 
-        // const identicon = <Identicon string={userName+UTCtime()}/>
+        const identicon = <Identicon string={userName+UTCtime()}/>
+        
         setUserName(value)
         setLoggedIn(true)
         setIdenticon(identicon)
@@ -48,7 +49,8 @@ export default function App() {
             msg:msg,
             user: userName
         }))
-        setMessages('')
+        // setMessages('')
+        setMessageValue('')
     }
 
     useEffect(() =>{
@@ -63,8 +65,9 @@ export default function App() {
 
             console.log('Received response from server: ', dataFromServer)
             if (dataFromServer.type === "message") {
+                console.log(messages)
                 const currentMessages = messages
-                console.log('Received message: ', currentMessages)
+                console.log('Received message: ', message)
                 setMessages(
                                 [...currentMessages,
                                     {
@@ -73,16 +76,18 @@ export default function App() {
                                      }
                                 ]
                             )
+                console.log(messages)
                 }
 
             }
  
-    }, [])
+    })
 
     let mainContent = null
 
     let enterMessageBox = 
         <section className="bottom">
+            
             <Search
                 placeholder="Enter message"
                 enterButton="Send"

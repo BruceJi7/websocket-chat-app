@@ -21,12 +21,15 @@ wsServer.on('request', function (request) {
 
     var userID = getUniqueID()
     console.log((new Date()) + ' Received a new connection from origin ' + request.origin + '.')
+    console.log('Raw request data: ', request)
 
     const connection = request.accept(null, request.origin)
     clients[userID] = connection
     console.log('connected: ' + userID)
 
     connection.on('message', function(message) {
+
+        console.log('Raw response: ', message)
 
         if (message.type === 'utf8') {
             console.log('Received message: ' + message.utf8Data)
@@ -40,6 +43,9 @@ wsServer.on('request', function (request) {
         
         }
 
+    })
+    connection.on('close', function(response){
+        console.log(response)
     })
 
 })
